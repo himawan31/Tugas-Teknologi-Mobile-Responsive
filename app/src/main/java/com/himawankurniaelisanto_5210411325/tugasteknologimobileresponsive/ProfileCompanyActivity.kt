@@ -14,21 +14,28 @@ class ProfileCompanyActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.location.setOnClickListener {
-            openGoogleMapsToIndofoodLocation()
+            val indofoodAddress = "Jl. Ipda Tut Harsono No.50-52, Muja Muju, Kec. Umbulharjo, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55165"
+            val uri = Uri.parse("geo:0,0?q=$indofoodAddress")
+            val mapIntent = Intent(Intent.ACTION_VIEW, uri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+
+            if (mapIntent.resolveActivity(packageManager) != null) {
+                startActivity(mapIntent)
+            } else {
+
+            }
         }
-    }
 
-    private fun openGoogleMapsToIndofoodLocation() {
-        val indofoodAddress = "Jl. Ipda Tut Harsono No.50-52, Muja Muju, Kec. Umbulharjo, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55165"
-        val uri = Uri.parse("geo:0,0?q=$indofoodAddress")
+        binding.website.setOnClickListener {
+            val indofoodWebsiteUrl = "https://www.indofood.com/"
+            val uri = Uri.parse(indofoodWebsiteUrl)
+            val websiteIntent = Intent(Intent.ACTION_VIEW, uri)
 
-        val mapIntent = Intent(Intent.ACTION_VIEW, uri)
-        mapIntent.setPackage("com.google.android.apps.maps")
+            if (websiteIntent.resolveActivity(packageManager) != null) {
+                startActivity(websiteIntent)
+            } else {
 
-        if (mapIntent.resolveActivity(packageManager) != null) {
-            startActivity(mapIntent)
-        } else {
-
+            }
         }
     }
 }
